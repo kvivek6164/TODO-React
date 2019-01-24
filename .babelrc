@@ -1,0 +1,10 @@
+{
+    "presets": [
+        "@babel/preset-react",
+        // "stage-1",
+        // "@babel/preset-stage-1"
+    ],
+    "plugins": [
+        "@babel/plugin-proposal-class-properties"
+    ]
+}
