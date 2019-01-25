@@ -5,6 +5,7 @@ import Crud from './Crud';
 import About from './About';
 import User from './user';
 import Home from './Home';
+import Modal from './modal';
 
 const userDetail = true;
 const PrivateRoute = ({component, ...rest}) => (
@@ -30,7 +31,7 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = {
-            newFilter: []
+            strLength: ''
         }
     }
 
@@ -57,7 +58,7 @@ export default class App extends Component {
 
 
 
-
+                <Modal />
                 <div className='container'>
                     <div className="panel panel-default">
                         <div className="panel-heading">
@@ -65,7 +66,7 @@ export default class App extends Component {
                         </div>
                         <div className="panel-body">
                             <label>Search: </label><Crud onChangeFilter={this.filterValue} /><br />
-                            <ListView filteredItem={this.state.newFilter} />
+                            <ListView filteredItem={this.state.strLength} />
                         </div>
                     </div>
                 </div>
@@ -73,9 +74,9 @@ export default class App extends Component {
             </Router>
         )
     }
-    filterValue = (val) => {
+    filterValue = (strLen) => {
         this.setState({
-            newFilter: val
+            strLength: strLen
         })
     }
 }

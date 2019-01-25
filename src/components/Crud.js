@@ -12,20 +12,16 @@ export default class Crud extends Component {
     render() {
         return (
             <form className="form-inline">
+                <input type="date" />
                 <input type="text" className="form-control" value={this.state.abc} onChange={this.handleChange} />
             </form>
         )
     }
     handleChange = (e) => {
-        var updatedList = this.state.initialItems;
-        updatedList = updatedList.filter(function (item) {
-            return item.product.toLowerCase().search(
-                e.target.value.toLowerCase()) !== -1;
-        });
+        
         this.setState({ 
-            abc: e.target.value,
-            // items: updatedList 
+            abc: e.target.value
         });
-        this.props.onChangeFilter(updatedList)
+        this.props.onChangeFilter(e.target.value)
     }
 }
