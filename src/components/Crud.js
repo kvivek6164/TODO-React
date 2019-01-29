@@ -9,6 +9,12 @@ export default class Crud extends Component {
             initialItems: data
         }
     }
+    handleChange = (e) => {
+        this.setState({
+            abc: e.target.value
+        });
+        this.props.onChangeFilter(e.target.value)
+    }
     render() {
         return (
             <form className="form-inline">
@@ -16,12 +22,5 @@ export default class Crud extends Component {
                 <input type="text" className="form-control" value={this.state.abc} onChange={this.handleChange} />
             </form>
         )
-    }
-    handleChange = (e) => {
-        
-        this.setState({ 
-            abc: e.target.value
-        });
-        this.props.onChangeFilter(e.target.value)
     }
 }

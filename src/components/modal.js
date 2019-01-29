@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 export default class Modal extends Component {
     render() {
         return (
-            <div className="modal" id="basicModal" tabIndex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div className="modal" id="basicModal">
+            {/*  style={{display: 'block'}} */}
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
