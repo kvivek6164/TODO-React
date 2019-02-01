@@ -1,49 +1,52 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { toggleTodo } from '../actions'
-// import TodoList from './todo'
-import { VisibilityFilters } from '../actions'
+import { connect } from 'react-redux';
 
-// const getVisibleTodos = (todos, filter) => {
-//   console.log('getvisible todos', todos, filter)
-//   switch (filter) {
-//     case VisibilityFilters.SHOW_ALL:
-//       return todos
-//     case VisibilityFilters.SHOW_COMPLETED:
-//       return todos.filter(t => t.completed)
-//     case VisibilityFilters.SHOW_ACTIVE:
-//       return todos.filter(t => !t.completed)
-//     default:
-//       throw new Error('Unknown filter: ' + filter)
-//   }
-// }
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+import { Comments } from './comments';
+
+import { deleteValue, editValue } from '../actions';
 class TodoList extends Component {
+    handleSelected = (index) => {
+        console.log(index);
+    }
+
     render() {
-        console.log('fetched>>>>>', this.props)
         return (
-            <ul>
-                {this.props.todos.map((todo, index) =>
-                    <li key={index}>{todo.text}</li>
-                )}
-            </ul>
+            <Router>
+                <div className="row">
+                    <div className="col-md-4 col-sm-4">
+                        <h4>User's Email
+                    <span className="pull-right">
+                                <Link to='/users/all'>All</Link>
+                            </span>
+                        </h4>
+                        <ul className="list-group">
+                            {this.props.temp.map((todo, index) => {
+                                if (todo.email !== '') {
+                                    return <Link to={`/users/${index}`} key={index} onClick={() => this.handleSelected(index)}>
+                                        <li className="list-group-item">{todo.email}</li>
+                                    </Link>
+
+                                }
+                            }
+                            )}
+                        </ul>
+                    </div>
+
+                    <Route path="/users/:id" component={Comments} />
+                </div>
+            </Router>
+
         )
     }
 }
 
 const mapStateToProps = state => {
-    console.log(state);
-    return state;
+    const temp = [...state.todos]
+    return { temp }
 }
-// ({
-//   todos: getVisibleTodos(state.todos, state.visibilityFilter)
-// })
-
-// const mapDispatchToProps = dispatch => ({
-//     toggleTodo: id => dispatch(toggleTodo(id))
-// })
 
 export default connect(
-    mapStateToProps
-    // mapDispatchToProps
+    mapStateToProps,
 )(TodoList)
 
